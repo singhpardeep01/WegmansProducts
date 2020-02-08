@@ -28,7 +28,6 @@ public class Server implements Closeable{
         else{
             IP = IP.split(":")[0];
             users.put(username, out);
-            log(username + " connecting from " + IP);
             System.out.println(username + " connecting from " + IP);
             return username;
         }
@@ -42,7 +41,6 @@ public class Server implements Closeable{
     public synchronized void removeUser(String username, String IP){
         IP = IP.split(":")[0];
         if (users.containsKey(username)) {
-            log(username + " disconnecting from " + IP);
             System.out.println(username + " disconnecting from " + IP);
             users.remove(username);
         }
@@ -56,19 +54,9 @@ public class Server implements Closeable{
         try {
             this.server = new ServerSocket(port);
             this.users = new HashMap<>();
-            log("Server Running on port: " + port);
             System.out.println("Server Running on port: " + port);
         } catch (IOException e) {
         }
-    }
-
-    /**
-     * writes to the output file for log of the game
-     * @param message message to be written
-     */
-    public void log(String message){
-        writer.println(message);
-        writer.flush();
     }
     /**
      * closes the server
