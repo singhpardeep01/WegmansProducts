@@ -59,9 +59,6 @@ public class Server implements Closeable{
             writer= new PrintWriter("PlaceLog.txt");
             log("Server Running on port: " + port);
             System.out.println("Server Running on port: " + port);
-            Runtime rt = Runtime.getRuntime();
-            rt.exec("sudo pigpiod");
-
         } catch (IOException e) {
         }
     }
@@ -100,23 +97,12 @@ public class Server implements Closeable{
         }
     }
 
-    public synchronized void fanControls(Request<?> request) {
-        try {
-            if (request.getType() == Request.RequestType.FAN_POWER) {
-                System.out.println("TURN ON FAN");
-                Runtime rt = Runtime.getRuntime();
-                Process pr = rt.exec("python ir_tx_micros.py KenmoreStandingFanPower.txt");
-            }
-        } catch (IOException e) {
-            this.close();
-        }
-    }
     /**
      * main function starting the server
      * @param args input as determined
      */
     public static void main(String[] args) {
-        if (args.length != 2) {
+        if (args.length != 1) {
             System.out.println("Usage: java Server port");
             System.exit(1);
         }

@@ -5,7 +5,6 @@ public class Request<E extends Serializable> implements Serializable {
         ERROR,
         LOGIN,
         LOGIN_SUCCESS,
-        FAN_POWER
     }
 
     /** The request type */
