@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
                 setContentView(R.layout.activity_main);
             }
 
-            String args[] = {"129.21.157.116", "666", name };
+            String args[] = {"129.21.157.116", "666", "YEET"};
             Client client = new Client(args);
             //c.listen();
             //client.run();
