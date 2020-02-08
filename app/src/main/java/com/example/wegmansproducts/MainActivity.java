@@ -29,8 +29,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends Activity {
     private EditText editText;
+    private String name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +40,18 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         // This is where we write the mesage
         editText = (EditText) findViewById(R.id.editText);
-        System.out.println(editText);
-
+        name = editText.getText().toString();
 
         final Button button = findViewById(R.id.button_id);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setContentView(R.layout.activity_main);
             }
+
+            String args[] = {"129.21.157.116", "666", name };
+            Client client = new Client(args);
+            //c.listen();
+            //client.run();
         });
     }
 }
