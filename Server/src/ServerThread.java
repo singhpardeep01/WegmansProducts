@@ -68,7 +68,6 @@ public class ServerThread extends Thread implements Closeable{
             while (true) {
                 try {
                     Request<?> request = Exchange.read(in);
-                    server.fanControls(request);
                 } catch (IOException e) {
                     this.close();
                     server.removeUser(user, IP);
