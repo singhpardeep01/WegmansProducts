@@ -5,7 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-
 public class WegmansDatabase {
 
     public static void main(String[] args) throws IOException{
@@ -14,7 +13,7 @@ public class WegmansDatabase {
 
     public static void GET() throws IOException {
         URL store = new URL("https://api.wegmans.io/stores?Subscription-Key=6e17bbcf8f084f8c89b9c17c7e2462b4&api-version=2018-10-18");
-        URL product = new URL()
+        URL productCategory = new URL("https://api.wegmans.io/products/categories?api-version=2018-10-18&Subscription-Key=6e17bbcf8f084f8c89b9c17c7e2462b4");
         HttpURLConnection con = (HttpURLConnection) store.openConnection();
         con.setRequestMethod("GET");
         int responseCode = con.getResponseCode();
@@ -37,4 +36,7 @@ public class WegmansDatabase {
         }
 
     }
+
+
+
 }
