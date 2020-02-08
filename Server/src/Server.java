@@ -56,7 +56,6 @@ public class Server implements Closeable{
         try {
             this.server = new ServerSocket(port);
             this.users = new HashMap<>();
-            writer= new PrintWriter("PlaceLog.txt");
             log("Server Running on port: " + port);
             System.out.println("Server Running on port: " + port);
         } catch (IOException e) {
