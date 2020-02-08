@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class Server implements Closeable{
     private ServerSocket server;
     private HashMap<String, ObjectOutputStream> users;
-    private HashMap<String, Integer> connections;
     private PrintWriter writer;
 
     /**
@@ -28,17 +27,6 @@ public class Server implements Closeable{
         }
         else{
             IP = IP.split(":")[0];
-            if (connections.containsKey(IP)){
-                if (connections.get(IP) >= 10) {
-                    return "TOO MANY CLIENTS FROM CURRENT IP ADDRESS";
-                }
-                else{
-                    connections.replace(IP, connections.get(IP) + 1);
-                }
-            }
-            else {
-                connections.put(IP, 1);
-            }
             users.put(username, out);
             log(username + " connecting from " + IP);
             System.out.println(username + " connecting from " + IP);
@@ -53,12 +41,10 @@ public class Server implements Closeable{
      */
     public synchronized void removeUser(String username, String IP){
         IP = IP.split(":")[0];
-        if (users.containsKey(username) && connections.containsKey(IP)) {
+        if (users.containsKey(username)) {
             log(username + " disconnecting from " + IP);
             System.out.println(username + " disconnecting from " + IP);
             users.remove(username);
-            IP = IP.split(":")[0];
-            connections.replace(IP, connections.get(IP) - 1);
         }
     }
 
@@ -69,7 +55,6 @@ public class Server implements Closeable{
     public Server(int port)  {
         try {
             this.server = new ServerSocket(port);
-            this.connections = new HashMap<>();
             this.users = new HashMap<>();
             writer= new PrintWriter("PlaceLog.txt");
             log("Server Running on port: " + port);
